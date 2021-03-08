@@ -2,7 +2,7 @@ const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 
-const gridSchema = new mongoose.Schema({ fill: String, touched: Boolean });
+const gridSchema = new mongoose.Schema({ fill: String, touched: String });
 
 const drawingSchema = new mongoose.Schema({
   drawingName: {

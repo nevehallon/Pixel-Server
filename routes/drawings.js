@@ -44,6 +44,7 @@ router.post("/", auth, async (req, res) => {
   let drawing = new Drawing({
     drawingName: req.body.drawingName,
     description: req.body.description,
+    grid: req.body.grid,
     drawingNumber: await generateDrawingNumber(Drawing),
 
     user_id: req.user._id,
