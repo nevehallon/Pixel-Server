@@ -2,6 +2,8 @@ const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 
+const gridSchema = new mongoose.Schema({ fill: String, touched: Boolean });
+
 const drawingSchema = new mongoose.Schema({
   drawingName: {
     type: String,
@@ -14,6 +16,12 @@ const drawingSchema = new mongoose.Schema({
     required: true,
     minlength: 2,
     maxlength: 1024,
+  },
+  grid: {
+    type: [gridSchema],
+    required: true,
+    minlength: 225,
+    maxlength: 1225,
   },
   drawingNumber: {
     type: String,
@@ -31,6 +39,11 @@ function validateDrawing(drawing) {
   const schema = Joi.object({
     drawingName: Joi.string().min(2).max(255).required(),
     description: Joi.string().min(2).max(1024).required(),
+    grid: Joi.array()
+      .items({ fill: Joi.string(), touched: Joi.allow("", "true") })
+      .min(225)
+      .max(1225)
+      .required(),
   });
 
   return schema.validate(drawing);
