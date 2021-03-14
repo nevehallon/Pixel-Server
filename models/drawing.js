@@ -23,6 +23,12 @@ const drawingSchema = new mongoose.Schema({
     minlength: 225,
     maxlength: 1225,
   },
+  dataUrl: {
+    type: String,
+    required: true,
+    minlength: 225,
+    maxlength: 1225,
+  },
   drawingNumber: {
     type: String,
     required: true,
@@ -44,6 +50,7 @@ function validateDrawing(drawing) {
       .min(225)
       .max(1225)
       .required(),
+    dataUrl: Joi.string().required().label("src"),
   });
 
   return schema.validate(drawing);

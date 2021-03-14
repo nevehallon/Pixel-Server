@@ -41,10 +41,13 @@ router.post("/", auth, async (req, res) => {
   const { error } = validateDrawing(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
+  const { drawingName, description, grid, dataUrl } = req.body;
+
   let drawing = new Drawing({
-    drawingName: req.body.drawingName,
-    description: req.body.description,
-    grid: req.body.grid,
+    drawingName,
+    description,
+    grid,
+    dataUrl,
     drawingNumber: await generateDrawingNumber(Drawing),
 
     user_id: req.user._id,
