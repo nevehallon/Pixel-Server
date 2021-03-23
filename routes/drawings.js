@@ -9,7 +9,7 @@ router.get("/my-drawings", auth, async (req, res) => {
     return res.status(401).send("Access Denied.");
   }
 
-  const drawings = await Drawing.find({ user_id: req.user._id }, { grid: { _id: 0 } });
+  const drawings = await Drawing.find({ user_id: req.user._id }, { grid: 0 });
   if (!drawings) return res.status(404).send("No drawing with the given ID was not found.");
   res.send(drawings);
 });
@@ -32,7 +32,7 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 router.get("/:id", auth, async (req, res) => {
-  const drawing = await Drawing.findOne({ _id: req.params.id, user_id: req.user._id });
+  const drawing = await Drawing.findOne({ _id: req.params.id, user_id: req.user._id }, { grid: { _id: 0 } });
   if (!drawing) return res.status(404).send("The drawing with the given ID was not found.");
   res.send(drawing);
 });

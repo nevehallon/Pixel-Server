@@ -1,8 +1,27 @@
 @base = http://localhost:3002/api
 
 ###
-GET {{base}}/users/drawings?numbers=128949 HTTP/1.1
+GET {{base}}/users/me HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU
+###
+GET {{base}}/users/drawings?numbers=150369 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU
+### as painter
+PATCH {{base}}/users/favorites HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU
+Content-Type: application/json
+
+{
+    "drawings": ["150369", "858424"]
+}
+### not painter
+PATCH {{base}}/users/favorites HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzFjZTJjNzhjMDA5NDBjZjMzNzgiLCJwYWludGVyIjpmYWxzZSwiaWF0IjoxNjE2NTE3NjQ1fQ.wGtqq5qkp6SDnJtQ6g4dmvP3U3cAjKyzoxxwCntT_H0
+Content-Type: application/json
+
+{
+    "drawings": ["150369"]
+}
 ###
 GET {{base}}/drawings/my-drawings HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU

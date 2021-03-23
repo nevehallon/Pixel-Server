@@ -37,7 +37,7 @@ app.use(
       "-",
       tokens["response-time"](req, res),
       "ms",
-      JSON.stringify(req.query),
+      // JSON.stringify(req.headers),
     ].join(" ");
   })
 );

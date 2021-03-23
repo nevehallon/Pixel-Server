@@ -21,15 +21,16 @@ router.get("/drawings", auth, async (req, res) => {
   res.send(drawings);
 });
 
-router.patch("/drawings", auth, async (req, res) => {
+router.patch("/favorites", auth, async (req, res) => {
   const { error } = validateDrawings(req.body);
   if (error) res.status(400).send(error.details[0].message);
 
   const drawings = await getDrawings(req.body.drawings);
-  if (drawings.length != req.body.drawings.length) res.status(400).send("Drawing numbers don't match");
+  if (drawings.length != req.body.drawings.length) res.status(403).send("Drawing numbers don't match");
 
-  let user = await User.findById(req.user._id);
-  user.drawings = req.body.drawings;
+  let user = await User.findById(req.user._id).select("-password");
+  // TODO: only unique values
+  user.drawings.push(...req.body.drawings);
   user = await user.save();
   res.send(user);
 });
