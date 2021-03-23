@@ -56,7 +56,7 @@ router.patch("/delete-favorite", auth, async (req, res) => {
 
     let user = await User.findById(req.user._id).select("-password");
 
-    if (!user.drawings.includes(req.body.drawings[0])) return res.status(403).send("Drawing does not exist");
+    if (!user.drawings.includes(req.body.drawings[0])) return res.status(403).send("No such drawing exists");
 
     user.drawings = user.drawings.filter((x) => x !== req.body.drawings[0]);
 
