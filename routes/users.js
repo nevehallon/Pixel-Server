@@ -22,17 +22,26 @@ router.get("/drawings", auth, async (req, res) => {
 });
 
 router.patch("/favorites", auth, async (req, res) => {
-  const { error } = validateDrawings(req.body);
-  if (error) res.status(400).send(error.details[0].message);
+  try {
+    const { error } = validateDrawings(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  const drawings = await getDrawings(req.body.drawings);
-  if (drawings.length != req.body.drawings.length) res.status(403).send("Drawing numbers don't match");
+    const drawings = await getDrawings(req.body.drawings);
+    if (drawings.length != req.body.drawings.length) res.status(403).send("Drawing numbers don't match");
 
-  let user = await User.findById(req.user._id).select("-password");
-  // TODO: only unique values
-  user.drawings.push(...req.body.drawings);
-  user = await user.save();
-  res.send(user);
+    let user = await User.findById(req.user._id).select("-password");
+
+    const difference = user.drawings.filter((x) => !req.body.drawings.includes(x));
+
+    if (!difference.length) throw new Error("Oops!");
+
+    user.drawings = _.uniq([...user.drawings, ...req.body.drawings]);
+    user = await user.save();
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ ...error });
+  }
 });
 
 router.get("/me", auth, async (req, res) => {

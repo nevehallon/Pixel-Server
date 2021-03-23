@@ -12,7 +12,7 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjM
 Content-Type: application/json
 
 {
-    "drawings": ["150369", "858424"]
+    "drawings": ["150369"]
 }
 ### not painter
 PATCH {{base}}/users/favorites HTTP/1.1
