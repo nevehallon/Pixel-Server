@@ -27,7 +27,7 @@ const drawingSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 225,
-    maxlength: 1225,
+    maxlength: 10042,
   },
   drawingNumber: {
     type: String,

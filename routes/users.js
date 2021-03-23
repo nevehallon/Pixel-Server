@@ -7,7 +7,7 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 
 const getDrawings = async (drawingsArray) => {
-  const drawings = await Drawing.find({ painterNumber: { $in: drawingsArray } });
+  const drawings = await Drawing.find({ drawingNumber: { $in: drawingsArray } }).select("-grid");
   return drawings;
 };
 

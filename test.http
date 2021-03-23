@@ -1,0 +1,9 @@
+@base = http://localhost:3002/api
+
+###
+GET {{base}}/users/drawings?numbers=128949 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU
+###
+GET {{base}}/drawings/my-drawings HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU
+

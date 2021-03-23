@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const compression = require("compression");
 const cors = require("cors");
 
+const morgan = require("morgan");
+
 const users = require("./routes/users");
 const auth = require("./routes/auth");
 const drawings = require("./routes/drawings");
@@ -24,6 +26,21 @@ corsOptions = {
   origin: process.env.BASE_URL || "https://nevehallon.github.io",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
+
+app.use(
+  morgan((tokens, req, res) => {
+    return [
+      tokens.method(req, res),
+      tokens.url(req, res),
+      tokens.status(req, res),
+      tokens.res(req, res, "content-length"),
+      "-",
+      tokens["response-time"](req, res),
+      "ms",
+      JSON.stringify(req.query),
+    ].join(" ");
+  })
+);
 
 app.use(cors(corsOptions));
 app.use(helmet());

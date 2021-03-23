@@ -9,7 +9,7 @@ router.get("/my-drawings", auth, async (req, res) => {
     return res.status(401).send("Access Denied.");
   }
 
-  const drawings = await Drawing.find({ user_id: req.user._id });
+  const drawings = await Drawing.find({ user_id: req.user._id }, { grid: { _id: 0 } });
   if (!drawings) return res.status(404).send("No drawing with the given ID was not found.");
   res.send(drawings);
 });
@@ -49,7 +49,6 @@ router.post("/", auth, async (req, res) => {
     grid,
     dataUrl,
     drawingNumber: await generateDrawingNumber(Drawing),
-
     user_id: req.user._id,
   });
 
