@@ -6,16 +6,24 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjM
 ###
 GET {{base}}/users/drawings?numbers=150369 HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU
-### as painter
-PATCH {{base}}/users/favorites HTTP/1.1
+### add as painter
+PATCH {{base}}/users/add-favorite HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU
 Content-Type: application/json
 
 {
-    "drawings": ["150369"]
+    "drawings": ["128949"]
 }
-### not painter
-PATCH {{base}}/users/favorites HTTP/1.1
+### delete as painter
+PATCH {{base}}/users/delete-favorite HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU
+Content-Type: application/json
+
+{
+    "drawings": ["128949"]
+}
+### add not as painter
+PATCH {{base}}/users/add-favorite HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzFjZTJjNzhjMDA5NDBjZjMzNzgiLCJwYWludGVyIjpmYWxzZSwiaWF0IjoxNjE2NTE3NjQ1fQ.wGtqq5qkp6SDnJtQ6g4dmvP3U3cAjKyzoxxwCntT_H0
 Content-Type: application/json
 

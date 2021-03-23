@@ -21,26 +21,49 @@ router.get("/drawings", auth, async (req, res) => {
   res.send(drawings);
 });
 
-router.patch("/favorites", auth, async (req, res) => {
+router.patch("/add-favorite", auth, async (req, res) => {
   try {
     const { error } = validateDrawings(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     const drawings = await getDrawings(req.body.drawings);
-    if (drawings.length != req.body.drawings.length) res.status(403).send("Drawing numbers don't match");
+
+    //? drawings with these numbers don't exist
+    if (drawings.length != req.body.drawings.length) return res.status(403).send("Drawing numbers don't match");
 
     let user = await User.findById(req.user._id).select("-password");
 
-    const difference = user.drawings.filter((x) => !req.body.drawings.includes(x));
-
-    if (!difference.length) throw new Error("Oops!");
+    if (user.drawings.includes(req.body.drawings[0])) return res.status(403).send("Oops, drawing number must be new");
 
     user.drawings = _.uniq([...user.drawings, ...req.body.drawings]);
+
     user = await user.save();
     res.send(user);
   } catch (error) {
-    console.log(error);
-    return res.status(400).send({ ...error });
+    return res.status(400).send("Oops!");
+  }
+});
+
+router.patch("/delete-favorite", auth, async (req, res) => {
+  try {
+    const { error } = validateDrawings(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    const drawings = await getDrawings(req.body.drawings);
+
+    //? drawings with these numbers don't exist
+    if (drawings.length != req.body.drawings.length) return res.status(403).send("Drawing numbers don't match");
+
+    let user = await User.findById(req.user._id).select("-password");
+
+    if (!user.drawings.includes(req.body.drawings[0])) return res.status(403).send("Drawing does not exist");
+
+    user.drawings = user.drawings.filter((x) => x !== req.body.drawings[0]);
+
+    user = await user.save();
+    res.send(user);
+  } catch (error) {
+    return res.status(400).send("Oops!");
   }
 });
 
