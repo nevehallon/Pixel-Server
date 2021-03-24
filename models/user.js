@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   createdAt: { type: Date, default: Date.now },
-  drawings: Array,
+  favorites: Array,
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -51,7 +51,7 @@ function validateUser(user) {
 
 function validateDrawings(data) {
   const schema = Joi.object({
-    drawings: Joi.array().min(1).required(),
+    favorites: Joi.array().min(1).required(),
   });
 
   return schema.validate(data);

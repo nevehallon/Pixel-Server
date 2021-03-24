@@ -12,7 +12,7 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjM
 Content-Type: application/json
 
 {
-    "drawings": ["128949"]
+    "favorites": ["128949"]
 }
 ### delete as painter
 PATCH {{base}}/users/delete-favorite HTTP/1.1
@@ -20,7 +20,7 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjM
 Content-Type: application/json
 
 {
-    "drawings": ["568221"]
+    "favorites": ["568221"]
 }
 ### add not as painter
 PATCH {{base}}/users/add-favorite HTTP/1.1
@@ -28,7 +28,7 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzFjZTJjNzhjM
 Content-Type: application/json
 
 {
-    "drawings": ["150369"]
+    "favorites": ["150369"]
 }
 ###
 GET {{base}}/drawings/my-drawings HTTP/1.1
