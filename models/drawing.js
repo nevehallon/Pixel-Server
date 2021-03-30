@@ -43,8 +43,8 @@ const Drawing = mongoose.model("Drawing", drawingSchema);
 
 function validateDrawing(drawing) {
   const schema = Joi.object({
-    drawingName: Joi.string().min(2).max(255).required(),
-    description: Joi.string().min(2).max(1024).required(),
+    drawingName: Joi.string().min(2).max(26).required(),
+    description: Joi.string().min(2).max(225).required(),
     grid: Joi.array()
       .items({ fill: Joi.string(), touched: Joi.allow("", "true") })
       .min(225)

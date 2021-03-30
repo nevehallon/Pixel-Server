@@ -42,7 +42,7 @@ app.use(
   })
 );
 
-app.use(cors(corsOptions));
+app.use(cors(/* corsOptions TODO: reactivate */));
 app.use(helmet());
 app.use(compression({ level: 6, filter: shouldCompress }));
 app.use(express.json());
