@@ -33,4 +33,7 @@ Content-Type: application/json
 ###
 GET {{base}}/drawings/my-drawings HTTP/1.1
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU
+###
+POST {{base}}/drawings/60564fffa5289a0224622614 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMzYzNhMjJjNzhjMDA5NDBjZjMzNzkiLCJwYWludGVyIjp0cnVlLCJpYXQiOjE2MTYzMzg0NTF9._pbyDbLIVvtgOOSMs5eyDH5D3RRkpKvNM6K6H1_eySU
 
