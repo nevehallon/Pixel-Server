@@ -28,7 +28,9 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   createdAt: { type: Date, default: Date.now },
-  favorites: Array,
+  favorites: {
+    type: Array,
+  },
 });
 
 userSchema.methods.generateAuthToken = function () {

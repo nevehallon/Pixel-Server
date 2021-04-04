@@ -9,13 +9,13 @@ const drawingSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 255,
+    maxlength: 26,
   },
   description: {
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 1024,
+    maxlength: 225,
   },
   grid: {
     type: [gridSchema],
@@ -35,6 +35,9 @@ const drawingSchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 99999999999,
     unique: true,
+  },
+  painterInfo: {
+    type: Object,
   },
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });

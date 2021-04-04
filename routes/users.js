@@ -67,6 +67,11 @@ router.patch("/delete-favorite", auth, async (req, res) => {
   }
 });
 
+router.get("/:id", auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select({ password: 0, email: 0, painter: 0 });
+  res.send(user);
+});
+
 router.get("/me", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
   res.send(user);

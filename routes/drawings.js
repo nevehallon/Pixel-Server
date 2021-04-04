@@ -1,6 +1,7 @@
 const express = require("express");
 const _ = require("lodash");
 const { Drawing, validateDrawing, generateDrawingNumber } = require("../models/drawing");
+const { User } = require("../models/user");
 const auth = require("../middleware/auth");
 const router = express.Router();
 
@@ -43,6 +44,8 @@ router.post("/", auth, async (req, res) => {
 
   const { drawingName, description, grid, dataUrl } = req.body;
 
+  const user = await User.findById(req.user._id).select({ password: 0, email: 0, painter: 0 });
+
   let drawing = new Drawing({
     drawingName,
     description,
@@ -50,6 +53,7 @@ router.post("/", auth, async (req, res) => {
     dataUrl,
     drawingNumber: await generateDrawingNumber(Drawing),
     user_id: req.user._id,
+    painterInfo: user,
   });
 
   post = await drawing.save();
