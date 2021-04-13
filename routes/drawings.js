@@ -1,9 +1,10 @@
 const express = require("express");
 const _ = require("lodash");
-const { Drawing, validateDrawing, generateDrawingNumber } = require("../models/drawing");
+const { Drawing, validateDrawing, generateDrawingNumber, generateShareUrl } = require("../models/drawing");
 const { User } = require("../models/user");
 const auth = require("../middleware/auth");
 const router = express.Router();
+const fetch = require("node-fetch");
 
 router.get("/my-drawings", auth, async (req, res) => {
   if (!req.user.painter) {
@@ -39,25 +40,36 @@ router.get("/:id", auth, async (req, res) => {
 });
 
 router.post("/", auth, async (req, res) => {
-  const { error } = validateDrawing(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  try {
+    const { error } = validateDrawing(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
-  const { drawingName, description, grid, dataUrl } = req.body;
+    const { drawingName, description, grid, dataUrl } = req.body;
 
-  const user = await User.findById(req.user._id).select({ password: 0, email: 0, painter: 0 });
+    const user = await User.findById(req.user._id).select({ password: 0, email: 0, painter: 0 });
 
-  let drawing = new Drawing({
-    drawingName,
-    description,
-    grid,
-    dataUrl,
-    drawingNumber: await generateDrawingNumber(Drawing),
-    user_id: req.user._id,
-    painterInfo: user,
-  });
+    const longUrl = await generateShareUrl(dataUrl);
 
-  post = await drawing.save();
-  res.send(post);
+    const response = await fetch(longUrl);
+    const { link: shareUrl } = await response.json();
+
+    let drawing = new Drawing({
+      drawingName,
+      description,
+      grid,
+      dataUrl,
+      shareUrl: await shareUrl,
+      drawingNumber: await generateDrawingNumber(Drawing),
+      user_id: req.user._id,
+      painterInfo: user,
+    });
+
+    post = await drawing.save();
+    res.send(post);
+  } catch (error) {
+    res.status(400).send(error);
+    console.log(error);
+  }
 });
 
 module.exports = router;

@@ -52,7 +52,7 @@ app.use("/api/auth", auth);
 app.use("/api/drawings", drawings);
 
 mongoose
-  .connect("mongodb://localhost/pixels", {
+  .connect(process.env.MONGO_DB_CREDENTIALS || "mongodb://localhost/pixels", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

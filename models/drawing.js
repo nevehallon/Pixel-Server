@@ -39,6 +39,9 @@ const drawingSchema = new mongoose.Schema({
   painterInfo: {
     type: Object,
   },
+  shareUrl: {
+    type: String,
+  },
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
@@ -67,6 +70,9 @@ async function generateDrawingNumber(Drawing) {
   }
 }
 
-exports.Drawing = Drawing;
-exports.validateDrawing = validateDrawing;
-exports.generateDrawingNumber = generateDrawingNumber;
+const generateShareUrl = async (dataUrl) => {
+  const encodedData = encodeURIComponent(dataUrl);
+  return `https://url-shorten-api-three.vercel.app/api/create?u=https://og-image-html.vercel.app/%20?images=${encodedData}`;
+};
+
+module.exports = { generateShareUrl, Drawing, validateDrawing, generateDrawingNumber };
