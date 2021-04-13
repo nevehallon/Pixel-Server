@@ -72,7 +72,7 @@ async function generateDrawingNumber(Drawing) {
 
 const generateShareUrl = async (dataUrl) => {
   const encodedData = encodeURIComponent(dataUrl);
-  return `https://url-shorten-api-three.vercel.app/api/create?u=https://og-image-html.vercel.app/%20?images=${encodedData}`;
+  return `https://lnkr-two.vercel.app/api/create?u=https://og-image-html.vercel.app/%20?images=${encodedData}`;
 };
 
 module.exports = { generateShareUrl, Drawing, validateDrawing, generateDrawingNumber };
