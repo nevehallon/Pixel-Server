@@ -65,7 +65,7 @@ function validateDrawing(drawing) {
 async function generateDrawingNumber(Drawing) {
   while (true) {
     let randomNumber = _.random(1000, 999999);
-    let drawing = await Drawing.findOne({ painterNumber: randomNumber });
+    let drawing = await Drawing.findOne({ drawingNumber: randomNumber });
     if (!drawing) return String(randomNumber);
   }
 }
